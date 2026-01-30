@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background-color: #F7F8FA;
+  color: #1f2937;
+
+
+   min-height: 100vh;
+
+  background-image: url("/hero-bg.png"); /* blurred grey building */
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+
+  background-color: #f8fafc; /* fallback */
+}
