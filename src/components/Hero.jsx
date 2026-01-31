@@ -1,9 +1,17 @@
 import "../styles/hero.css";
 import heroImage from "../assets/Mansi_Portfolio2.png";
 
+
 function Hero() {
   return (
     <section className="hero-section">
+
+      <div className="hero-blob-purple"></div>
+      <div className="hero-blob-yellow"></div>
+      <div className="hero-blob-green"></div>
+      <div className="hero-blob-blue"></div>
+
+
       <div className="hero-content">
         <h2>Hi, I'm Mansi Tawar</h2>
         <h1>Java Full Stack Developer</h1>
