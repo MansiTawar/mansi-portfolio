@@ -8,6 +8,8 @@
     height: 735.237px;
     gap: 80px;
 
+    max-width: 100%;
+
     position: relative;   /* REQUIRED for blobs */
     overflow: hidden;     /* hides blob overflow */
 
@@ -170,4 +172,54 @@
 }
 
 
+/* Tablet Responsive <=1023px */
 
+@media (max-width: 1023px) {
+  .hero-section {
+    padding: 40px 40px;
+    gap: 40px;
+  }
+
+  .hero-content {
+    margin-top: 80px;
+  }
+
+  .hero-visual img {
+    width: 500px;
+  }
+}
+
+
+/* Mobile Responsive <=767px */
+
+@media (max-width: 767px) {
+  .hero-section {
+    flex-direction: column;   /* stack text + image */
+    align-items: center;
+    height: auto;
+    padding: 100px 20px 60px;
+  }
+
+  .hero-content {
+    margin-top: 0;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 32px;
+    white-space: normal; /* allow wrap on small screens */
+  }
+
+  .hero-content h2 {
+    font-size: 18px;
+  }
+
+  .hero-visual {
+    margin-top: 40px;
+  }
+
+  .hero-visual img {
+    width: 320px;
+  }
+}
