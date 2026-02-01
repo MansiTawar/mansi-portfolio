@@ -10,9 +10,12 @@
     max-width: 100%;
     padding-inline: clamp(40px, 8vw, 120px);
     position: relative;   /* REQUIRED for blobs */
-    overflow: hidden;     /* hides blob overflow */
+     overflow: hidden;   /*  hides blob overflow */
+    /* overflow-x: hidden;
+    overflow-y: visible; */
     background: #fcfaf9;
-    z-index: 1;
+    z-index: 10;
+    isolation: isolate;
 }
 
 /* .hero-section::before {
@@ -35,6 +38,8 @@
 .hero-content{
     max-width: 600px;
     transform: translateX(135px);
+    position: relative;
+    z-index: 20;
     
 }
 
@@ -97,7 +102,7 @@
   /* margin-top: 40px; */
   flex-shrink: 0;
   position: relative;
-  z-index: 2;
+  
   
 }
 
@@ -109,6 +114,21 @@
 
   transform: translate(125px ,73px);  /* safe - image LOWER → use transform, not margin*/
   
+  /* for soft edge left/right */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,1) 15%,
+    rgba(0,0,0,1) 85%,
+    rgba(0,0,0,0) 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,1) 15%,
+    rgba(0,0,0,1) 85%,
+    rgba(0,0,0,0) 100%
+  );
 }
 
 
@@ -135,11 +155,6 @@
   pointer-events: none;
 }
 
-
-.hero-content{
-    position: relative;
-    z-index: 1;
-}
 
 .hero-blob-yellow {
     position: absolute;
@@ -181,9 +196,6 @@
 }
 
 
-
-
-
 /* ===== Watercolor Layer Integration ===== */
 
 /* already present but confirmed */
@@ -199,12 +211,6 @@
   z-index: 0;
 }
 
-/* keep text & image on top */
-.hero-content,
-.hero-visual {
-  position: relative;
-  z-index: 2;
-}
 
 /* Stroke Style: Clearer Edges, Translucent Pigment */
         .stroke {
@@ -262,4 +268,98 @@
         .sp7 { width: 25px; height: 25px; background: #fbbf24; bottom: 40px; left: 520px; opacity: 0.3; }
         .sp8 { width: 8px; height: 8px; background: #ec4899; top: 150px; left: 50px; opacity: 0.5; }
         .sp9 { width: 11px; height: 11px; background: #06b6d4; bottom: 380px; left: 300px; opacity: 0.4; }
+
+
+/* ===============================
+   TABLET VIEW — SAME AS PC
+   (Scale down only, no layout change)
+   =============================== */
+@media (max-width: 1024px) {
+
+  .hero-section{
+    gap: 60px; /* slightly reduced */
+    padding-inline: clamp(32px, 6vw, 80px);
+    
+  }
+
+  /* CONTENT — same position, smaller */
+  .hero-content{
+    transform: translateX(90px); /* reduced from 135px */
+    max-width: 520px;
+  }
+
+  .hero-content h1{
+    font-size: 38px;
+  }
+
+  .hero-content h2{
+    font-size: 26px;
+  }
+
+  .hero-content p{
+    font-size: 18px;
+  }
+
+  /* IMAGE — same alignment, scaled */
+  .hero-visual img{
+    width: 627px;
+    transform: translate(-75px, 51px);
+  }
+
+  /* BLOBS — SAME SHAPES, SMALLER */
+  .hero-blob-purple{
+    width: 220px;
+    height: 220px;
+    top: 170px;
+    left: -110px;
+  }
+
+  .hero-blob-yellow{
+    width: 150px;
+    height: 240px;
+    top: 440px;
+    left: -30px;
+  }
+
+  .hero-blob-green{
+    width: 180px;
+    height: 120px;
+    top: 300px;
+    left: -40px;
+  }
+
+  .hero-blob-blue{
+    width: 195px;
+    height: 149px;
+    top: 576px;
+    left: 76px;
+  }
+
+  /* WATER STROKES — SAME STYLE, SHRUNK */
+  .stroke-red{
+    width: 320px;
+    height: 170px;
+    left: -90px;
+  }
+
+  .stroke-orange{
+    width: 207px;
+    height: 132px;
+  }
+
+  .stroke-yellow{
+    width: 340px;
+    height: 130px;
+  }
+
+  .stroke-green{
+    width: 240px;
+    height: 240px;
+  }
+
+  .stroke-blue{
+    width: 380px;
+    height: 160px;
+  }
+}
 
