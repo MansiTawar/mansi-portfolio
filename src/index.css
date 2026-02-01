@@ -14,12 +14,8 @@ body {
 
    min-height: 100vh;
 
-  background-image: url("/hero-bg.png"); /* blurred grey building */
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-
   background-color: #f8fafc; /* fallback */
+  color: #1f2937;
 }
 
 
