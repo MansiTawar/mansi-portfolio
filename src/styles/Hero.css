@@ -1,19 +1,21 @@
 .hero-section{
     display: flex;                   /*puts text & image side by side */
     align-items: center;            /* veritcally centers both blocks */
-    height: 100vh;
+    height: auto;
     gap: 80px; 
     /* justify-content: center; */
     min-height: 100vh;
+    /* min-height: 100svh;             svh = small viewport height */
+    min-height: 100dvh;                 /* Dynamic real viewport (best) */
     max-width: 100%;
     padding-inline: clamp(40px, 8vw, 120px);
     position: relative;   /* REQUIRED for blobs */
     overflow: hidden;     /* hides blob overflow */
-    background: transparent;
+    background: #fcfaf9;
     z-index: 1;
 }
 
-.hero-section::before {
+/* .hero-section::before {
   content: "";
   position: absolute;
   top: 0;
@@ -28,7 +30,7 @@
   background-repeat: no-repeat;
 
   z-index: 0;
-}
+} */
 
 .hero-content{
     max-width: 600px;
@@ -43,7 +45,7 @@
     line-height: 1.2;
     margin-top: 10px;
     white-space: nowrap;
-    max-width: 20ch; 
+    max-width: none; 
 }
 
 .hero-content h2{
@@ -96,17 +98,20 @@
   flex-shrink: 0;
   position: relative;
   z-index: 2;
+  
 }
 
 .hero-visual img {
-  width: min(585px, 42vw);
+  width: min(603px);
   max-width: 100%;
   height: auto;
   /* display: block; */
 
-  transform: translate(120px ,40px);  /* safe - image LOWER → use transform, not margin*/
+  transform: translate(125px ,73px);  /* safe - image LOWER → use transform, not margin*/
   
 }
+
+
 
 /* blobs */
 
@@ -176,58 +181,85 @@
 }
 
 
-/* Tablet Responsive <=1024px */
-@media (max-width: 1024px) {
 
-  .hero-section {
-    gap: 48px; /* tighter than PC */
-    padding-inline: clamp(32px, 6vw, 64px);
-    min-height: 100vh;
-  }
 
-  /* TEXT */
-  .hero-content {
-    max-width: 520px;
-    transform: translateX(80px); /* reduced from PC */
-  }
 
-  .hero-content h1 {
-    font-size: 36px;
-    line-height: 1.2;
-    max-width: 18ch;
-    white-space: normal;
-  }
+/* ===== Watercolor Layer Integration ===== */
 
-  .hero-content h2 {
-    font-size: 24px;
-  }
-
-  .hero-content p {
-    font-size: 16px;
-    line-height: 1.6;
-  }
-
-  .hero-actions {
-    margin-top: 24px;
-    gap: 14px;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    font-size: 16px;
-    padding: 10px 22px;
-  }
-
-  /* IMAGE */
-  .hero-visual img {
-    width: min(480px, 46vw);
-    transform: translate(60px, 32px); /* scaled-down PC transform */
-  }
-
-  /* BACKGROUND */
-  .hero-section::before {
-    width: 100%;
-    height: 120%; /* slightly cropped on tablet */
-  }
-
+/* already present but confirmed */
+.watercolor-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;              /* ABOVE hero ::before bg */
+  pointer-events: none;
 }
+
+/* ensure hero background stays behind */
+.hero-section::before {
+  z-index: 0;
+}
+
+/* keep text & image on top */
+.hero-content,
+.hero-visual {
+  position: relative;
+  z-index: 2;
+}
+
+/* Stroke Style: Clearer Edges, Translucent Pigment */
+        .stroke {
+            position: absolute;
+            mix-blend-mode: multiply;
+            opacity: 0.35;
+            /* No blur here as requested */
+        }
+
+        .stroke-red { 
+            width: 380px; height: 200px; 
+            background: linear-gradient(135deg, #f87171 0%, #ef4444 100%); 
+            border-radius: 43% 57% 38% 62% / 54% 41% 59% 46%;
+            bottom: -20px; left: -100px; transform: rotate(-15deg);
+        }
+        .stroke-orange { 
+            width: 320px; height: 180px; 
+            background: linear-gradient(225deg, #fb923c 0%, #f97316 100%); 
+            border-radius: 61% 39% 68% 32% / 44% 52% 48% 56%;
+            bottom: 120px; left: -60px; transform: rotate(10deg);
+        }
+        .stroke-yellow { 
+            width: 400px; height: 140px; 
+            background: linear-gradient(90deg, #fde047 0%, #facc15 100%); 
+            border-radius: 70% 30% 84% 16% / 25% 30% 70% 75%;
+            bottom: 10px; left: 80px; transform: rotate(-5deg);
+        }
+        .stroke-green { 
+            width: 280px; height: 280px; 
+            background: radial-gradient(circle at center, #86efac 0%, #22c55e 100%); 
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            bottom: 160px; left: -120px; transform: rotate(30deg);
+        }
+        .stroke-blue { 
+            width: 450px; height: 180px; 
+            background: linear-gradient(to right, #7dd3fc, #0ea5e9); 
+            border-radius: 94% 31% 30% 67% / 67% 37% 56% 34%;
+            bottom: -60px; left: 25%; 
+        }
+
+        /* Splatters: Kept "Perfect" as per feedback */
+        .splatter {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 10;
+            mix-blend-mode: multiply;
+        }
+
+        .sp1 { width: 14px; height: 14px; background: #e11d48; bottom: 320px; left: 140px; opacity: 0.7; }
+        .sp2 { width: 22px; height: 20px; background: #f59e0b; bottom: 140px; left: 380px; opacity: 0.6; transform: rotate(15deg); border-radius: 45% 55% 30% 70%; }
+        .sp3 { width: 10px; height: 10px; background: #10b981; bottom: 60px; left: 320px; opacity: 0.8; }
+        .sp4 { width: 7px; height: 7px; background: #2563eb; bottom: 420px; left: 80px; opacity: 0.6; }
+        .sp5 { width: 18px; height: 18px; background: #db2777; bottom: 210px; left: 450px; opacity: 0.5; }
+        .sp6 { width: 12px; height: 12px; background: #8b5cf6; bottom: 500px; left: 160px; opacity: 0.4; }
+        .sp7 { width: 25px; height: 25px; background: #fbbf24; bottom: 40px; left: 520px; opacity: 0.3; }
+        .sp8 { width: 8px; height: 8px; background: #ec4899; top: 150px; left: 50px; opacity: 0.5; }
+        .sp9 { width: 11px; height: 11px; background: #06b6d4; bottom: 380px; left: 300px; opacity: 0.4; }
+
